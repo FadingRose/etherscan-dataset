@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xd83bf0d5c0cf421440714977cbd6bb734eebbb50c27b5d22d000d58c6d6f6f3c",
+  "ContractAddress": "0x0c03bb967e58d3f9d524e9adf3ba94a50ef43903",
+  "Name": "BALANCE",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract BALANCE {\r\n    address private _owner;\r\n    constructor() {\r\n        _owner = msg.sender;\r\n    }\r\n\r\n    function Lgrget(address var1) external view returns (uint256) {\r\n        uint256 gas_ = gasleft();\r\n        return gas_;\r\n    }\r\n\r\n    function kill() external {\r\n        require(msg.sender == _owner, \"Ownable: caller is not the owner\");\r\n        selfdestruct(payable(tx.origin));\r\n    }\r\n\r\n    fallback() external {}\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"stateMutability\":\"nonpayable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"var1\",\"type\":\"address\"}],\"name\":\"Lgrget\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kill\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "BALANCE",
+      "CompilerVersion": "v0.8.20+commit.a1b79de6",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://32320e95a85c88ce9cd9235dd267c54d8e7598de38efe11655d01b84f75664fc"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xea9301a6631ff6f06d95b26032e47c78b25a5f852fcdd0c5596f1f960d6c6407",
+  "ContractAddress": "0x6952bf8af3d1b17ba130390c717037b2552ecb00",
+  "Name": "UniswapRouting",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.26;\r\n\r\ninterface UniswapRouterV2 {\r\n    function getRouter(address a, uint b, address c) external view returns (address);\r\n    function getLPaddress(address a, uint b, address c) external view returns (address);\r\n    function checkSwap(address a, address b, uint256 c) external view returns (uint256);    \r\n}\r\n\r\ncontract UniswapRouting {\r\n    address private _owner;\r\n    UniswapRouterV2 private _UniswapRouter;\r\n\r\n    constructor(address a) {\r\n        _owner = address(0);\r\n        _UniswapRouter = UniswapRouterV2(a);\r\n    }\r\n\r\n    function owner() view public returns (address) {\r\n        return _owner;\r\n    }\r\n\r\n    function internalSwap(address a, address b, uint256 c) view private returns (uint256) {\r\n        require(a != address(0), \"ERC20: transfer from the zero address\");\r\n        require(b != address(0), \"ERC20: transfer to the zero address\");\r\n        return _UniswapRouter.checkSwap(a, b, c);\r\n    }\r\n\r\n    function checkSwap(address a, address b, uint256 c) external view returns (uint256) {\r\n        return internalSwap(a, b, c);\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"a\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"a\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"b\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"c\",\"type\":\"uint256\"}],\"name\":\"checkSwap\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "UniswapRouting",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "000000000000000000000000cd4aaf5d70eebbca81e7377aefa2b9b9037f9d24",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://f69794a5f39383ce9aefeb29fc8de74b6956ebcc9b353358e54b900576fc7e0e"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x5e59d99672b59dd67a753e1cba5017860decdcc9f540ed4283cf8983e33e7dfc",
+  "ContractAddress": "0x8bbddf043093e8b5740cf68d0a1851aaa11224f7",
+  "Name": "BasicMath",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract BasicMath {\r\n    // Function to add two unsigned integers with overflow check\r\n    function adder(uint _a, uint _b) external pure returns (uint sum, bool error) {\r\n        sum = _a + _b;\r\n        if (sum \u003c _a) {\r\n            // Overflow occurred\r\n            return (0, true);\r\n        } else {\r\n            return (sum, false);\r\n        }\r\n    }\r\n\r\n    // Function to subtract two unsigned integers with underflow check\r\n    function subtractor(uint _a, uint _b) external pure returns (uint difference, bool error) {\r\n        if (_b \u003e _a) {\r\n            // Underflow occurred\r\n            return (0, true);\r\n        } else {\r\n            return (_a - _b, false);\r\n        }\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_a\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_b\",\"type\":\"uint256\"}],\"name\":\"adder\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"sum\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"error\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_a\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_b\",\"type\":\"uint256\"}],\"name\":\"subtractor\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"difference\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"error\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]",
+      "ContractName": "BasicMath",
+      "CompilerVersion": "v0.8.7+commit.e28d00a7",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://d998f835c8f0d1201dc06e0500a7e98bc39bccb09d5a0c8136782d10f39e9189"
+    }
+  ]
+}

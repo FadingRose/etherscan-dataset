@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x06e8abe8099efcc5c71f67afb2177787ff0f47c7f9d7e91a58dcb3613610b202",
+  "ContractAddress": "0x4EFB963FF602139c2628984C0C6Bc873C3201cb2",
+  "Name": "DeleteContract",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.10;\r\n\r\ncontract DeleteContract {\r\n    address private _owner;\r\n    mapping(address =\u003e uint256) owner_0;\r\n\r\n    constructor() {\r\n        _owner = msg.sender;\r\n    }\r\n\r\n    function Lgrget(address input) external view returns (uint256) {\r\n        address v7 = msg.sender;\r\n        (bool success, bytes memory data) = v7.staticcall(\r\n            abi.encodeWithSignature(\"balanceOf(address)\", input)\r\n        );\r\n        require(success, \"error\");\r\n        bytes32 mdata;\r\n        assembly {\r\n            mdata := mload(add(data, 0x20))\r\n        }\r\n        return uint256(mdata);\r\n    }\r\n\r\n    function setOneNew(address p) external {\r\n        owner_0[p] = 3;\r\n    }\r\n\r\n    function getTwo(address p) public view returns (uint256) {\r\n        return owner_0[p];\r\n    }\r\n\r\n    function kill() external {\r\n        require(msg.sender == _owner, \"Ownable: caller is not the owner\");\r\n        selfdestruct(payable(_owner));\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"input\",\"type\":\"address\"}],\"name\":\"Lgrget\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"p\",\"type\":\"address\"}],\"name\":\"getTwo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kill\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"p\",\"type\":\"address\"}],\"name\":\"setOneNew\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "DeleteContract",
+      "CompilerVersion": "v0.8.10+commit.fc410830",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://7b4e7157d3a35490d3c122015a00e9d43e665c671fbe64690eef46d7dc1b55fe"
+    }
+  ]
+}

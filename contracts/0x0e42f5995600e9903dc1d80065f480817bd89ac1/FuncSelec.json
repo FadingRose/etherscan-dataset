@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x93e4d192c30f6302d5d2828ee665ef68c31b0b865d7c8ffe13e94767cf5ed3b8",
+  "ContractAddress": "0x0e42f5995600e9903dc1d80065f480817bd89ac1",
+  "Name": "FuncSelec",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity ^0.8.13;\r\n\r\ncontract FuncSelec {\r\n    function degenInOKX_5300999548(\r\n        bytes32 b1, bytes calldata b2, uint256 u1, bytes calldata b3, uint256 u2, uint256 u3) public {\r\n            return ;\r\n    }\r\n\r\n    function degenInOKX_3353250592(\r\n        address a1, uint256 u1\r\n    ) public {\r\n        return ;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"a1\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"u1\",\"type\":\"uint256\"}],\"name\":\"degenInOKX_3353250592\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"b1\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"b2\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"u1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"b3\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"u2\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"u3\",\"type\":\"uint256\"}],\"name\":\"degenInOKX_5300999548\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "FuncSelec",
+      "CompilerVersion": "v0.8.13+commit.abaa5c0e",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "Unlicense",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://021a888510617b94d850eb226ce6e8a6fdd2c6fe67073e81174fa60190be7145"
+    }
+  ]
+}

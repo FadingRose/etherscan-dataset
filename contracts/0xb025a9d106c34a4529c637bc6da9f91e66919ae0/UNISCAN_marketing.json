@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xab357ea92b3314f4507dd7f0552aea972a6fbddcc1dabb81a26d90b22b58d3d1",
+  "ContractAddress": "0xb025a9d106c34a4529c637bc6da9f91e66919ae0",
+  "Name": "UNISCAN_marketing",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "/*\r\n * UNISCAN - AI-based prediction solution for your crypto-trades\r\n * \r\n * This is a promotional contract, building community first\r\n * \r\n * TG : https://t.me/uniscan\r\n*/\r\n\r\n// SPDX-License-Identifier: UNLICENSE\r\n\r\npragma solidity ^0.8.24;\r\n\r\ncontract UNISCAN_marketing {\r\n    string public constant NAME = \"UNISCAN AI\";\r\n    string public constant SYMBOL = \"SCAN\";\r\n    uint8 public constant DECIMALS = 9;\r\n    uint256 public constant TOTAL_SUPPLY = 1000000 * (10 ** uint256(DECIMALS));\r\n\r\n    address private _owner;\r\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\r\n\r\n    constructor() {\r\n        _owner = msg.sender;\r\n        emit OwnershipTransferred(address(0), _owner);\r\n        emit OwnershipTransferred(_owner, address(0));\r\n    }\r\n\r\n    function totalSupply() public pure returns (uint256) {\r\n        return TOTAL_SUPPLY;\r\n    }\r\n\r\n    function name() public pure returns (string memory) {\r\n        return NAME;\r\n    }\r\n\r\n    function symbol() public pure returns (string memory) {\r\n        return SYMBOL;\r\n    }\r\n\r\n    function decimals() public pure returns (uint8) {\r\n        return DECIMALS;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DECIMALS\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"NAME\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SYMBOL\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TOTAL_SUPPLY\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]",
+      "ContractName": "UNISCAN_marketing",
+      "CompilerVersion": "v0.8.24+commit.e11b9ed9",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "Unlicense",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://68c9494e81893dc016e2e559c775ec4e46defd9be779d64b91ac0f4e345d3515"
+    }
+  ]
+}

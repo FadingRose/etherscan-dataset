@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x12fa5db28f53ad553a68d7a6d688b8143b07fd205eefcab204cb2ca5cb578cab",
+  "ContractAddress": "0xe516e2a242b5b21bd94c1a4dc8d71073f3ec08de",
+  "Name": "HelloWorld",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity \u003e=0.6.12 \u003c0.9.0;\r\n\r\ncontract HelloWorld {\r\n  /**\r\n   * @dev Prints Hello World string\r\n   */\r\n  function print() public pure returns (string memory) {\r\n    return \"Hello World!\";\r\n  }\r\n\r\n  uint256 myUint;\r\n\r\n  function Brajeetlian(uint _input) public  {\r\n    myUint = _input;\r\n  }\r\n\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_input\",\"type\":\"uint256\"}],\"name\":\"Brajeetlian\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"print\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]",
+      "ContractName": "HelloWorld",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://28529c4d0df0eb31a13f7e5f6e66b47971643b3fa370a08c440b15320687ea71"
+    }
+  ]
+}

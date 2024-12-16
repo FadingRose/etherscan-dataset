@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x2bee3b2f6da85585072fe0ca61210c99b04170ad9ca1ea2db6ee0f7f440994d4",
+  "ContractAddress": "0x2cfccd74ea57840692b6866352743eba46c3e044",
+  "Name": "SubscriptionManager",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nabstract contract Ownable {\r\n    address internal owner;\r\n\r\n    constructor(address _owner) {\r\n        owner = _owner;\r\n    }\r\n\r\n    modifier onlyOwner() {\r\n        require(isOwner(msg.sender), \"Only owner can execute the following\");\r\n        _;\r\n    }\r\n\r\n    function isOwner(address account) public view returns (bool) {\r\n        return account == owner;\r\n    }\r\n\r\n    function renounceOwnership() public onlyOwner {\r\n        owner = address(0);\r\n        emit OwnershipTransferred(address(0));\r\n    }\r\n\r\n    event OwnershipTransferred(address owner);\r\n}\r\n\r\ninterface USDTContract {\r\n    function approve(address spender, uint value) external;\r\n\r\n    function transferFrom(address from, address to, uint value) external;\r\n}\r\n\r\ncontract SubscriptionManager is Ownable {\r\n    address public usdtAddress = 0xdAC17F958D2ee523a2206206994597C13D831ec7;\r\n    USDTContract public usdtContract;\r\n    event SubscriptionLog(\r\n        address token,\r\n        address from,\r\n        address to,\r\n        uint256 value,\r\n        uint256 time\r\n    );\r\n\r\n    constructor() Ownable(msg.sender) {\r\n        usdtContract = USDTContract(usdtAddress);\r\n    }\r\n\r\n    function withdrawTokens(uint256 _amount) external onlyOwner {\r\n        usdtContract.approve(address(this), _amount);\r\n        usdtContract.transferFrom(address(this), owner, _amount);\r\n    }\r\n\r\n    function depositTokens(uint256 _amount) external {\r\n        usdtContract.transferFrom(msg.sender, address(this), _amount);\r\n        emit SubscriptionLog(\r\n            usdtAddress,\r\n            msg.sender,\r\n            address(this),\r\n            _amount,\r\n            block.timestamp\r\n        );\r\n    }\r\n\r\n    function withrawETH() public onlyOwner {\r\n        uint256 balance = address(this).balance;\r\n        payable(msg.sender).transfer(balance);\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"SubscriptionLog\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"depositTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isOwner\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"usdtAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"usdtContract\",\"outputs\":[{\"internalType\":\"contract USDTContract\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withrawETH\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "SubscriptionManager",
+      "CompilerVersion": "v0.8.0+commit.c7dfd78e",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://3e3429b4dab75f4e293d299cabb722eb823106bfbde9989afd70fd80daadd6db"
+    }
+  ]
+}

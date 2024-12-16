@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x3cfd7cbbd0433afaed39dfda8da9104cc07455d3ba810f44118d953eedc0f6af",
+  "ContractAddress": "0x4d495f926518879b11c9b1388327bb7c2972dacd",
+  "Name": "ProphetRevenueShare",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\n// ProphetBots: Revenue Share (MultiSend)\r\n// Website: https://prophetbots.com\r\n// Telegram: https://t.me/prophetbots\r\npragma solidity ^0.8.26;\r\n\r\n/**\r\n @dev Basic ERC Interface.\r\n */\r\ninterface ERC20Basic {\r\n    function totalSupply() external view returns (uint256);\r\n    function balanceOf(address who) external view returns (uint256);\r\n    function transfer(address to, uint256 value) external returns (bool);\r\n    event Transfer(address indexed from, address indexed to, uint256 value);\r\n}\r\n\r\n/**\r\n @dev ERC Interface.\r\n */\r\ninterface ERC20 is ERC20Basic {\r\n    function allowance(address owner, address spender) external view returns (uint256);\r\n    function transferFrom(address from, address to, uint256 value) external returns (bool);\r\n    function approve(address spender, uint256 value) external returns (bool);\r\n    event Approval(address indexed owner, address indexed spender, uint256 value);\r\n}\r\n\r\n/**\r\n * @title SafeMath\r\n * @dev Math operations with safety checks that revert on error\r\n */\r\nlibrary SafeMath {\r\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        if (a == 0) {\r\n            return 0;\r\n        }\r\n        uint256 c = a * b;\r\n        require(c / a == b, \"SafeMath: multiplication overflow\");\r\n        return c;\r\n    }\r\n\r\n    function div(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        require(b \u003e 0, \"SafeMath: division by zero\");\r\n        uint256 c = a / b;\r\n        return c;\r\n    }\r\n\r\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        require(b \u003c= a, \"SafeMath: subtraction overflow\");\r\n        return a - b;\r\n    }\r\n\r\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        uint256 c = a + b;\r\n        require(c \u003e= a, \"SafeMath: addition overflow\");\r\n        return c;\r\n    }\r\n}\r\n\r\n/**\r\n * @title MultiSend\r\n * @dev Contract that allows multiple ETH transfers in a single transaction\r\n */\r\ncontract ProphetRevenueShare {\r\n    using SafeMath for uint256;\r\n\r\n    function Distribute(address[] calldata addresses, uint256[] calldata amounts) external payable {\r\n        require(addresses.length == amounts.length, \"Addresses and amounts arrays must be of the same length\");\r\n\r\n        uint256 totalAmount = 0;\r\n        for (uint256 i = 0; i \u003c amounts.length; i++) {\r\n            totalAmount = totalAmount.add(amounts[i]);\r\n        }\r\n        require(msg.value == totalAmount, \"Total amount sent must match the sum of amounts to be distributed\");\r\n\r\n        for (uint256 i = 0; i \u003c addresses.length; i++) {\r\n            payable(addresses[i]).transfer(amounts[i]);\r\n        }\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"addresses\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"name\":\"Distribute\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]",
+      "ContractName": "ProphetRevenueShare",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://a4dac7daa0bb4509f4ee96574735fc3e6e69e2fa6bfc2f659b87470c36e3cafc"
+    }
+  ]
+}

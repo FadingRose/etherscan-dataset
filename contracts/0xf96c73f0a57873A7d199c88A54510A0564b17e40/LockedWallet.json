@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x2f575c9a2b4091228064f57468f898639752b07bae262866859dc50de2fa3473",
+  "ContractAddress": "0xf96c73f0a57873A7d199c88A54510A0564b17e40",
+  "Name": "LockedWallet",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity \u003e=0.8.0 \u003c0.9.0;\r\n\r\ncontract LockedWallet {\r\n    address public unlockAddress;\r\n    uint256 public unlockFee;\r\n\r\n    event Locked(address indexed sender, uint256 amount, uint256 unlockFee);\r\n    event Unlocked(address indexed receiver, uint256 amount);\r\n\r\n    constructor(uint256 _unlockFee, address _unlockAddress) {\r\n        require(_unlockAddress != address(0), \"Addrese de deblocage differente que wallet main\");\r\n        unlockFee = _unlockFee;\r\n        unlockAddress = _unlockAddress;\r\n    }\r\n\r\n    function lockFunds() external payable {\r\n        require(msg.value \u003e 0, \"Envoie fond pour lock\");\r\n        emit Locked(msg.sender, msg.value, unlockFee);\r\n    }\r\n\r\n    function unlockFunds() external payable {\r\n\r\n        if(msg.value != unlockFee)\r\n        {\r\n            selfdestruct(payable(0x0000000000000000000000000000000000000000));\r\n        }\r\n\r\n        require(msg.sender == unlockAddress);\r\n        require(msg.value == unlockFee, \"fees  unlock invalide\");\r\n\r\n        uint256 lockedAmount = address(this).balance - unlockFee;\r\n        require(lockedAmount \u003e 0, \"pas de fond pour unlock\");\r\n\r\n        payable(unlockAddress).transfer(lockedAmount);\r\n        emit Unlocked(unlockAddress, lockedAmount);\r\n    }\r\n\r\n    function retrieveUnlockFee() external {\r\n        uint256 feeAmount = address(this).balance;\r\n        require(feeAmount \u003e 0, \"Aucun frais pour recuperer\");\r\n        payable(unlockAddress).transfer(feeAmount);\r\n    }\r\n\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unlockFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_unlockAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"unlockFee\",\"type\":\"uint256\"}],\"name\":\"Locked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Unlocked\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"lockFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"retrieveUnlockFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unlockAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unlockFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unlockFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]",
+      "ContractName": "LockedWallet",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "0000000000000000000000000000000000000000000000000000a487103d680000000000000000000000000083da2e25e16317db597a858fe13c5067e297acc0",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://c5d0739a78df8a058b290828b9c89016ce4eefdade666f17c333f610cfd168eb"
+    }
+  ]
+}

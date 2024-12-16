@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x3c399672428ed13ec3a24b58b7c995257caec239d778892fb30daa5fbe4483ea",
+  "ContractAddress": "0x3f324a71c5600d7d3b855b60082cd015a84d651e",
+  "Name": "MyTestContract",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.8.16;\r\n\r\ncontract MyTestContract {\r\n    function getBaseFee() public view returns (uint) {\r\n        return block.basefee;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"name\":\"getBaseFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "MyTestContract",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://a5fee2171e25ee9315742fc697a2945d8f8b6e507ed8ac00e880ff7fcdbc3117"
+    }
+  ]
+}

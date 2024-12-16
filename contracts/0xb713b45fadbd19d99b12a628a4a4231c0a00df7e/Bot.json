@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x4d15be42ffb6083b73993a520adbdc6cec68ccd21a0f812fa9947b11cdd7133c",
+  "ContractAddress": "0xb713b45fadbd19d99b12a628a4a4231c0a00df7e",
+  "Name": "Bot",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "//SPDX-License-Identifier: UNLICENSED\r\npragma solidity 0.6.12;\r\n\r\npragma experimental ABIEncoderV2;\r\n\r\ninterface IERC20 {\r\n    function transfer(address to, uint value) external returns (bool);\r\n}\r\n\r\ninterface IUniswapV2Pair {\r\n    function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;\r\n}\r\n\r\n//interface IFactory {\r\n//    function g (uint count) external;\r\n//    function d (uint count) external;\r\n//}\r\n\r\n// This contract simply calls multiple targets sequentially, ensuring WETH balance before and after\r\n\r\ncontract Bot {\r\n    address private immutable owner;\r\n    address private immutable executor;\r\n\r\n    IERC20 private constant WETH = IERC20(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2);\r\n//    IFactory private FACTORY = IFactory(0xf3E331Ef2E9bDa503362562A9a10bb66b4AE834f);\r\n\r\n    modifier onlyExecutor() {\r\n        require(msg.sender == executor);\r\n        _;\r\n    }\r\n\r\n    modifier onlyOwner() {\r\n        require(msg.sender == owner);\r\n        _;\r\n    }\r\n\r\n    function sB(address _pairAddress, uint256 amount0Out, uint256 amount1Out, uint256 amountIn) external onlyExecutor {\r\n        IUniswapV2Pair UniswapV2Pair = IUniswapV2Pair(_pairAddress);\r\n        WETH.transfer(_pairAddress, amountIn);\r\n        UniswapV2Pair.swap(amount0Out, amount1Out, address(this), new bytes(0));\r\n//        if(destruct \u003e 0) {\r\n//            FACTORY.d(destruct);\r\n//        }\r\n    }\r\n\r\n    function sS(address _pairAddress, address _tokenAddress, uint256 amount0Out, uint256 amount1Out, uint256 amountIn) external onlyExecutor payable {\r\n        IUniswapV2Pair UniswapV2Pair = IUniswapV2Pair(_pairAddress);\r\n        IERC20 ERC20 = IERC20(_tokenAddress);\r\n        ERC20.transfer(_pairAddress, amountIn);\r\n        UniswapV2Pair.swap(amount0Out, amount1Out, address(this), new bytes(0));\r\n\r\n\r\n        block.coinbase.transfer(address(this).balance);\r\n//        if(destruct \u003e 0) {\r\n//            FACTORY.d(destruct);\r\n//        }\r\n    }\r\n\r\n    constructor() public payable {\r\n        executor = msg.sender;\r\n        owner = msg.sender;\r\n    }\r\n\r\n    receive() external payable {\r\n    }\r\n\r\n//    function sF(address _factoryAddress) external onlyExecutor {\r\n//        FACTORY = IFactory(_factoryAddress);\r\n//    }\r\n\r\n\r\n    function call(address payable _to, uint256 _value, bytes calldata _data) external onlyOwner payable returns (bytes memory) {\r\n        require(_to != address(0));\r\n        (bool _success, bytes memory _result) = _to.call{value: _value}(_data);\r\n        require(_success);\r\n        return _result;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"payable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"call\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_pairAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0Out\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1Out\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"}],\"name\":\"sB\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_pairAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0Out\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1Out\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"}],\"name\":\"sS\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+      "ContractName": "Bot",
+      "CompilerVersion": "v0.6.12+commit.27d51765",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "Unlicense",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://572023c3190f8df06379a1b57b9d7a678a97f334f71706046bae6675999faaa5"
+    }
+  ]
+}

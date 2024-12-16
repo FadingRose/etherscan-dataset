@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x548b19e4a904f2a2668d03555abf5c8483c11f71296a302315612b06ad4807a0",
+  "ContractAddress": "0x46da4406ea41f9e7b976221a69d02a749babb9b0",
+  "Name": "TTM",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "/**\r\n *Submitted for verification at Etherscan.io on 2024-07-25\r\n*/\r\n\r\n//SPDX-License-Identifier: MIT\r\n\r\n/*\r\n * Let's Make America Great Again with Trump the man !\r\n*/\r\n\r\npragma solidity ^0.8.1;\r\n\r\ncontract TTM {\r\n    string public constant NAME = \"Trump the man\";\r\n    string public constant SYMBOL = \"TTM\";\r\n    uint8 public constant DECIMALS = 18;\r\n    uint256 public constant TOTAL_SUPPLY = 4690000000 * (10 ** uint256(DECIMALS));\r\n\r\n    mapping(address =\u003e uint256) private _balances;\r\n    event Transfer(address indexed from, address indexed to, uint256 value);\r\n\t\r\n    address private _owner;\r\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\r\n\r\n    constructor() {\r\n        _balances[msg.sender] = TOTAL_SUPPLY;\r\n        emit Transfer(address(0), msg.sender, TOTAL_SUPPLY);\r\n        emit OwnershipTransferred(address(0), msg.sender);\r\n        emit OwnershipTransferred(msg.sender, address(0));\r\n    }\r\n\r\n    function totalSupply() public pure returns (uint256) {\r\n        return TOTAL_SUPPLY;\r\n    }\r\n\r\n    function name() public pure returns (string memory) {\r\n        return NAME;\r\n    }\r\n\r\n    function symbol() public pure returns (string memory) {\r\n        return SYMBOL;\r\n    }\r\n\r\n    function decimals() public pure returns (uint8) {\r\n        return DECIMALS;\r\n    }\r\n\r\n    function transfer(address recipient, uint256 amount) public returns (bool) {\r\n        _balances[msg.sender] -= amount;\r\n        _balances[recipient] += amount;\r\n        emit Transfer(msg.sender, recipient, amount);\r\n        return true;\r\n    }\r\n\r\n    function min(uint256 a, uint256 b) private pure returns (uint256){\r\n      return (a\u003eb)?b:a;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DECIMALS\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"NAME\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SYMBOL\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TOTAL_SUPPLY\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "TTM",
+      "CompilerVersion": "v0.8.1+commit.df193b15",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://b484211f55e56189ff84c7d0c9573beae9c32d469293423a4b8b422d4e877abd"
+    }
+  ]
+}

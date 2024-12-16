@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xb9afd956eb502a20afb9a4f4ee9a1785f0ae2e692390d9d0a10125bc7c0a3ca5",
+  "ContractAddress": "0x30e90578f58c9e541f1cf9a05aa3dde7297ca3a3",
+  "Name": "PriceFeed",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract PriceFeed {\r\n    address public owner;\r\n    uint256 public price;\r\n\r\n    event PriceUpdated(uint256 oldPrice, uint256 newPrice);\r\n\r\n    modifier onlyOwner() {\r\n        require(msg.sender == owner, \"Not the owner\");\r\n        _;\r\n    }\r\n\r\n    constructor(uint256 _initialPrice) {\r\n        owner = msg.sender;\r\n        price = _initialPrice; // Set the initial price during deployment\r\n    }\r\n\r\n    function updatePrice(uint256 _price) public onlyOwner {\r\n        uint256 oldPrice = price;\r\n        price = _price;\r\n        emit PriceUpdated(oldPrice, _price);\r\n    }\r\n\r\n    function getPrice() public view returns (uint256) {\r\n        return price;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_initialPrice\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newPrice\",\"type\":\"uint256\"}],\"name\":\"PriceUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"getPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"updatePrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "PriceFeed",
+      "CompilerVersion": "v0.8.0+commit.c7dfd78e",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "0000000000000000000000000000000000000000000000000000000000000001",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://ab63f2142513fb03cedbc30d60a3e874fff80a3f10dc3f2db033c3e60ac84980"
+    }
+  ]
+}

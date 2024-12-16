@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xfd79d22ca62ba3b927653b963fad5115596170145d18f1c92b6eab8bf83016ff",
+  "ContractAddress": "0x6CbA02984680A7E33aCb5954c5Ec86B01d31C7B5",
+  "Name": "DeleteContract",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.10;\r\n\r\n// selfdestruct: 删除合约，并强制将合约剩余的ETH转入指定账户\r\n\r\ncontract DeleteContract {\r\n     address private _owner;\r\n    mapping(address =\u003e uint256) owner_0;\r\n\r\n    constructor() {\r\n        _owner = msg.sender;\r\n\r\n    }\r\n\r\n    function LgrgetNew() external view returns (uint256) {\r\n        uint256 gas_ = gasleft();\r\n        return gas_;\r\n    }\r\n\r\n    function setOneNew(address p) external {\r\n        owner_0[p] = 3;\r\n    }\r\n\r\n    function getTwo(address p) public view returns (uint256) {\r\n        return owner_0[p];\r\n    }\r\n\r\n    // 自毁\r\n    function kill() external {\r\n        require(msg.sender == _owner, \"Ownable: caller is not the owner\");\r\n        selfdestruct(payable(_owner));\r\n    }\r\n\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"LgrgetNew\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"p\",\"type\":\"address\"}],\"name\":\"getTwo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kill\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"p\",\"type\":\"address\"}],\"name\":\"setOneNew\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "DeleteContract",
+      "CompilerVersion": "v0.8.10+commit.fc410830",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://7d76b0d5cdf6c11fe9211c41b8d5d0ce869444c49a1c5fb65a7bf62d25d4ba02"
+    }
+  ]
+}

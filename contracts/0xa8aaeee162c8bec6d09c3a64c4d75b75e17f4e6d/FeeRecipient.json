@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x10c1a2babfdab8c21851819911dfc076c27d284dcfac7a11cc50c00e531cee2a",
+  "ContractAddress": "0xa8aaeee162c8bec6d09c3a64c4d75b75e17f4e6d",
+  "Name": "FeeRecipient",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// File: contracts/interfaces/IFeeDispatcher.sol\r\n\r\n\r\npragma solidity \u003e=0.8.10;\r\n\r\ninterface IFeeDispatcher {\r\n    function dispatch(bytes32 _publicKeyRoot) external payable;\r\n\r\n    function getWithdrawer(bytes32 _publicKeyRoot) external view returns (address);\r\n}\r\n// File: contracts/FeeRecipient.sol\r\n\r\n//SPDX-License-Identifier: BUSL-1.1\r\npragma solidity \u003e=0.8.10;\r\n\r\n\r\ncontract FeeRecipient {\r\n    /// @notice Constructor replay prevention\r\n    bool internal initialized;\r\n    /// @notice Address where funds are sent to be dispatched\r\n    IFeeDispatcher internal dispatcher;\r\n    /// @notice Public Key root assigned to this receiver\r\n    bytes32 internal publicKeyRoot;\r\n\r\n    error AlreadyInitialized();\r\n\r\n    /// @notice Initializes the receiver\r\n    /// @param _dispatcher Address that will handle the fee dispatching\r\n    /// @param _publicKeyRoot Public Key root assigned to this receiver\r\n    function init(address _dispatcher, bytes32 _publicKeyRoot) external {\r\n        if (initialized) {\r\n            revert AlreadyInitialized();\r\n        }\r\n        initialized = true;\r\n        dispatcher = IFeeDispatcher(_dispatcher);\r\n        publicKeyRoot = _publicKeyRoot;\r\n    }\r\n\r\n    /// @notice Empty calldata fallback\r\n    receive() external payable {}\r\n\r\n    /// @notice Non-empty calldata fallback\r\n    fallback() external payable {}\r\n\r\n    /// @notice Triggers a withdrawal by sending its funds + its public key root to the dispatcher\r\n    /// @dev Can be called by any wallet as recipients are not parameters\r\n    function withdraw() external {\r\n        dispatcher.dispatch{value: address(this).balance}(publicKeyRoot);\r\n    }\r\n\r\n    /// @notice Retrieve the assigned public key root\r\n    function getPublicKeyRoot() external view returns (bytes32) {\r\n        return publicKeyRoot;\r\n    }\r\n\r\n    /// @notice retrieve the assigned withdrawer\r\n    function getWithdrawer() external view returns (address) {\r\n        return dispatcher.getWithdrawer(publicKeyRoot);\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"name\":\"AlreadyInitialized\",\"type\":\"error\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"getPublicKeyRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getWithdrawer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_dispatcher\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_publicKeyRoot\",\"type\":\"bytes32\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+      "ContractName": "FeeRecipient",
+      "CompilerVersion": "v0.8.10+commit.fc410830",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "istanbul",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://916b2703fc8b391df079d109493cc6f80b2fcf27bd1192f046991e9395d7c5b8"
+    }
+  ]
+}

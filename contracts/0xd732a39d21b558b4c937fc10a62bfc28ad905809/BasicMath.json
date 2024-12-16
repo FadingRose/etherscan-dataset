@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x5442b0ab2a96a5de3aa39db24898b4028411bc1ad3526e36781bb8b304537e3a",
+  "ContractAddress": "0xd732a39d21b558b4c937fc10a62bfc28ad905809",
+  "Name": "BasicMath",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.26;\r\n\r\ncontract BasicMath {\r\n    function adder(uint _a, uint _b) external pure returns (uint sum, bool error) {\r\n        sum = _a + _b;\r\n        if (sum \u003c _a) {\r\n            // Overflow occurred\r\n            return (0, true);\r\n        } else {\r\n            return (sum, false);\r\n        }\r\n    }\r\n\r\n    function subtractor(uint _a, uint _b) external pure returns (uint difference, bool error) {\r\n        if (_b \u003e _a) {\r\n            // Underflow occurred\r\n            return (0, true);\r\n        } else {\r\n            return (_a - _b, false);\r\n        }\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_a\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_b\",\"type\":\"uint256\"}],\"name\":\"adder\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"sum\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"error\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_a\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_b\",\"type\":\"uint256\"}],\"name\":\"subtractor\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"difference\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"error\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]",
+      "ContractName": "BasicMath",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://8911d7c570441da1468296ee28a57f0631cbb2c8375db3d82b68547bf4cac8fe"
+    }
+  ]
+}

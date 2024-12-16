@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x42c3e60794f01a6f282c15f1c96af6ab627cf171b54cd98ba591ce590bae15d4",
+  "ContractAddress": "0x1358CB3cc7adca5E5FE6ECF4339792bdc5CB5083",
+  "Name": "AlexUSDCWallet",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "{{\r\n  \"language\": \"Solidity\",\r\n  \"sources\": {\r\n    \"contracts/usdc_deposit.sol\": {\r\n      \"content\": \"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface IERC20 {\\n    function totalSupply() external view returns (uint256);\\n    function balanceOf(address account) external view returns (uint256);\\n    function transfer(address recipient, uint256 amount) external returns (bool);\\n    function allowance(address owner, address spender) external view returns (uint256);\\n    function approve(address spender, uint256 amount) external returns (bool);\\n    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\\n}\\n\\ncontract AlexUSDCWallet {\\n    address public owner;\\n    IERC20 public usdcToken;\\n\\n    event Deposit(address indexed from, uint256 amount);\\n    event Withdrawal(address indexed to, uint256 amount);\\n    event WithdrawalAll(address indexed to, uint256 amount);\\n\\n    constructor() {\\n        owner = msg.sender;\\n        usdcToken = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);\\n    }\\n\\n    modifier onlyOwner() {\\n        require(msg.sender == owner, \\\"Not the contract owner\\\");\\n        _;\\n    }\\n\\n    function deposit(uint256 amount) external {\\n        require(usdcToken.transferFrom(msg.sender, address(this), amount), \\\"Transfer failed\\\");\\n        emit Deposit(msg.sender, amount);\\n    }\\n\\n    function withdraw(uint256 amount) external onlyOwner {\\n        require(usdcToken.balanceOf(address(this)) \u003e= amount, \\\"Insufficient balance\\\");\\n        require(usdcToken.transfer(owner, amount), \\\"Transfer failed\\\");\\n        emit Withdrawal(owner, amount);\\n    }\\n\\n    function withdrawAll() external onlyOwner {\\n        uint256 balance = usdcToken.balanceOf(address(this));\\n        require(balance \u003e 0, \\\"No balance to withdraw\\\");\\n        require(usdcToken.transfer(owner, balance), \\\"Transfer failed\\\");\\n        emit WithdrawalAll(owner, balance);\\n    }\\n\\n    function getBalance() external view returns (uint256) {\\n        return usdcToken.balanceOf(address(this));\\n    }\\n}\\n\"\r\n    }\r\n  },\r\n  \"settings\": {\r\n    \"optimizer\": {\r\n      \"enabled\": true,\r\n      \"runs\": 200\r\n    },\r\n    \"outputSelection\": {\r\n      \"*\": {\r\n        \"*\": [\r\n          \"evm.bytecode\",\r\n          \"evm.deployedBytecode\",\r\n          \"devdoc\",\r\n          \"userdoc\",\r\n          \"metadata\",\r\n          \"abi\"\r\n        ]\r\n      }\r\n    }\r\n  }\r\n}}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"WithdrawalAll\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"usdcToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "AlexUSDCWallet",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": ""
+    }
+  ]
+}

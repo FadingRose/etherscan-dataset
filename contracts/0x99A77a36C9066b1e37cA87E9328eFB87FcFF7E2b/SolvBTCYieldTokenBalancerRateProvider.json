@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x5d5a6ff342e1093632e88fd5cb4d3db588c1ed86a174e428da0952a03503fb84",
+  "ContractAddress": "0x99A77a36C9066b1e37cA87E9328eFB87FcFF7E2b",
+  "Name": "SolvBTCYieldTokenBalancerRateProvider",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "{{\r\n  \"language\": \"Solidity\",\r\n  \"settings\": {\r\n    \"evmVersion\": \"paris\",\r\n    \"libraries\": {},\r\n    \"metadata\": {\r\n      \"bytecodeHash\": \"ipfs\",\r\n      \"useLiteralContent\": true\r\n    },\r\n    \"optimizer\": {\r\n      \"enabled\": false,\r\n      \"runs\": 200\r\n    },\r\n    \"remappings\": [],\r\n    \"outputSelection\": {\r\n      \"*\": {\r\n        \"*\": [\r\n          \"evm.bytecode\",\r\n          \"evm.deployedBytecode\",\r\n          \"devdoc\",\r\n          \"userdoc\",\r\n          \"metadata\",\r\n          \"abi\"\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  \"sources\": {\r\n    \"contracts/IRateProvider.sol\": {\r\n      \"content\": \"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\ninterface IRateProvider {\\n    function getRate() external view returns (uint256);\\n}\"\r\n    },\r\n    \"contracts/ISolvBTCYieldToken.sol\": {\r\n      \"content\": \"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\ninterface ISolvBTCYieldToken {\\n\\tfunction getValueByShares(uint256 shares) external view returns (uint256 value);\\n\\tfunction decimals() external view returns (uint8);\\n}\"\r\n    },\r\n    \"contracts/SolvBTCYieldTokenBalancerRateProvider.sol\": {\r\n      \"content\": \"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"./IRateProvider.sol\\\";\\nimport \\\"./ISolvBTCYieldToken.sol\\\";\\n\\ncontract SolvBTCYieldTokenBalancerRateProvider is IRateProvider {\\n\\taddress public immutable solvBTCYieldToken;\\n\\n\\tconstructor(address _solvBTCYieldToken) {\\n\\t\\tsolvBTCYieldToken = _solvBTCYieldToken;\\n\\t}\\n\\n \\t/// @notice The SolvBTC.xxx exchange rate in the form of how much SolvBTC 1 SolvBTC.xxx is worth\\n\\tfunction getRate() external view returns (uint256) {\\n\\t\\tuint8 decimals = ISolvBTCYieldToken(solvBTCYieldToken).decimals();\\n\\t\\treturn ISolvBTCYieldToken(solvBTCYieldToken).getValueByShares(10**decimals);\\n\\t}\\n}\"\r\n    }\r\n  }\r\n}}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_solvBTCYieldToken\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"getRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"solvBTCYieldToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "SolvBTCYieldTokenBalancerRateProvider",
+      "CompilerVersion": "v0.8.24+commit.e11b9ed9",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "000000000000000000000000d9d920aa40f578ab794426f5c90f6c731d159def",
+      "EVMVersion": "paris",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": ""
+    }
+  ]
+}

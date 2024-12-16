@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x70e65b23ae8a42a2eef213798058de12bf306c0426c232c75159ebac477151db",
+  "ContractAddress": "0xa4DB571Ec972AdACeF9BBe6dD0148A8BC90c4057",
+  "Name": "DentalToken",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract DentalToken {\r\n\r\n  // Token properties\r\n  string public name = \"Dental Token\";\r\n  string public symbol = \"DTL\";\r\n  uint256 public totalSupply = 1000000000;\r\n\r\n  // Mapping to store token balances\r\n  mapping(address =\u003e uint256) public balanceOf;\r\n\r\n  // Event for tracking token transfers\r\n  event Transfer(address indexed from, address indexed to, uint256 value);\r\n\r\n  // Constructor to initially assign all tokens to the contract deployer\r\n  constructor() {\r\n    balanceOf[msg.sender] = totalSupply;\r\n  }\r\n\r\n  // Transfer function allows users to send tokens to other addresses\r\n  function transfer(address recipient, uint256 amount) public returns (bool) {\r\n    require(balanceOf[msg.sender] \u003e= amount, \"Insufficient balance\");\r\n    balanceOf[msg.sender] -= amount;\r\n    balanceOf[recipient] += amount;\r\n    emit Transfer(msg.sender, recipient, amount);\r\n    return true;\r\n  }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "DentalToken",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "1",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://e79025b883da65c2cfb79e9a7ac334f99fe5d47b8aadaf89cb1142ed2594405d"
+    }
+  ]
+}

